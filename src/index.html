@@ -4,29 +4,31 @@
     <meta charset="UTF-8">
     <title>I works!</title>
     <link rel="stylesheet" href="css/main.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="/node_modules/moment/moment.js" />
+    <script src="/js/moment.min.js"></script>
 </head>
 <body>
-    <div id="app">
-        {{message}} {{currentTime}}
+    <div id="time">
+        {{currentTime}}
     </div>
 </body>
 
 <script>
-    var app = new Vue({
-        el: '#app',
+    new Vue({
+        el: '#time',
         data: {
             message: 'Current Time:',
-            currentTime: null
+            currentTime: null,
+            currentSeconds: null
         },
         methods: {
             updateCurrentTime() {
-                this.currentTime = moment().format('LTS');
+                this.currentTime = moment().format('HH:mm:ss');
             }
         },
         created() {
-            this.currentTime = moment().format('LTS');
+            this.updateCurrentTime();
             setInterval(() => this.updateCurrentTime(), 1 * 1000);
         }
     });
