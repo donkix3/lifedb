@@ -3,8 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>I works!</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="/node_modules/moment/moment.js" />
 </head>
 <body>
-    <p>It works!</p>
+    <div id="app">
+        {{message}} {{currentTime}}
+    </div>
 </body>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Current Time:',
+            currentTime: null
+        },
+        methods: {
+            updateCurrentTime() {
+                this.currentTime = moment().format('LTS');
+            }
+        },
+        created() {
+            this.currentTime = moment().format('LTS');
+            setInterval(() => this.updateCurrentTime(), 1 * 1000);
+        }
+    });
+</script>
+
 </html>
